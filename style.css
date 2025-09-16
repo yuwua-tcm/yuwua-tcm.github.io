@@ -1,95 +1,137 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>昱華中醫診所</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Noto Serif TC', serif;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background: linear-gradient(to bottom right, #b5c399, #8b9775);
-      color: #333;
-      line-height: 1.6;
-    }
-    header {
-      background: #5c7351;
-      padding: 20px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    header h1 {
-      font-size: 2.2rem;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #6e8962;
-      padding: 10px 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      padding: 8px 16px;
-      border-radius: 8px;
-      transition: background 0.3s ease;
-    }
-    nav a:hover {
-      background: #556b49;
-    }
-    .container {
-      max-width: 960px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    footer {
-      background: #5c7351;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-      nav a {
-        margin: 8px 0;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>昱華中醫診所</h1>
-    <p>YuWua TCM Clinic</p>
-  </header>
-  <nav>
-    <a href="index.html">首頁</a>
-    <a href="register.html">線上掛號</a>
-    <a href="progress.html">看診進度</a>
-    <a href="video.html">醫師影音</a>
-    <a href="articles.html">專欄文章</a>
-  </nav>
-  <div class="container">
-    <h2>歡迎來到昱華中醫診所</h2>
-    <p>我們提供專業的中醫診療服務，透過影片與文章分享健康觀念。</p>
-  </div>
-  <footer>
-    <p>© 2025 YuWua TCM Clinic. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+/* 全站通用 */
+body {
+  font-family: "Noto Serif TC", serif;
+  background-color: #fdfcf9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.8;
+}
+
+header {
+  background-color: #4b6043; /* 橄欖綠 */
+  color: #fff;
+  padding: 1.2rem 1.5rem;
+  text-align: center;
+  border-bottom: 5px solid #c4a169; /* 溫潤金底線 */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav li {
+  margin: 0 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #f8f8e7;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #c4a169; /* hover 金色 */
+  color: white;
+}
+
+main {
+  padding: 2rem 1.5rem;
+  max-width: 960px;
+  margin: auto;
+}
+
+h2 {
+  color: #4b6043;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid #c4a169;
+  padding-left: 12px;
+}
+
+form {
+  background-color: #fff;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+form input, form select, form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+form button {
+  margin-top: 1rem;
+  background-color: #4b6043;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #c4a169;
+  color: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: #eee;
+  color: #4b6043;
+}
+
+article {
+  background-color: #fefefe;
+  border: 1px solid #e0dacc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 6px solid #c4a169;
+  border-radius: 4px;
+}
+
+article h3 {
+  margin-top: 0;
+  color: #4b6043;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  color: #999;
+  background-color: #f6f6f6;
+  margin-top: 3rem;
+}

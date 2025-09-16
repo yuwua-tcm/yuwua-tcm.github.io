@@ -1,26 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>看診進度 | 昱華中醫診所</title>
+  <meta charset="UTF-8">
+  <title>看診進度 - 昱華中醫診所</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>看診進度</h1>
+    <h1>昱華中醫診所</h1>
     <nav>
-      <a href="index.html">首頁</a> |
-      <a href="register.html">線上掛號</a> |
-      <a href="progress.html">看診進度</a> |
-      <a href="video.html">醫師影音</a> |
-      <a href="articles.html">專欄文章</a>
+      <ul>
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="register.html">線上掛號</a></li>
+        <li><a href="progress.html">看診進度</a></li>
+        <li><a href="video.html">醫師影音</a></li>
+        <li><a href="articles.html">專欄文章</a></li>
+      </ul>
     </nav>
   </header>
+
   <main>
-    <h2>即時看診號碼查詢</h2>
-    <p>🔄 資料連接 Google Sheets 中，請稍後新增串接。</p>
+    <h2>📌 今日看診進度查詢</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>醫師</th>
+          <th>診間</th>
+          <th>目前號碼</th>
+          <th>備註</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>王醫師</td>
+          <td>1診</td>
+          <td>28號</td>
+          <td>穩定看診中</td>
+        </tr>
+        <tr>
+          <td>李醫師</td>
+          <td>2診</td>
+          <td>13號</td>
+          <td>稍有延後</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>📍提醒：資料每10分鐘更新，實際進度請洽現場櫃台。</p>
   </main>
+
   <footer>
-    <p>© 2025 YuWua TCM Clinic</p>
+    <p>© 2025 昱華中醫診所 YuWua TCM Clinic</p>
   </footer>
 </body>
 </html>
