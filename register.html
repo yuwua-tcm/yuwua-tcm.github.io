@@ -1,12 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <title>線上掛號 - 昱華中醫診所</title>
+  <meta charset="UTF-8" />
+  <title>線上掛號 | 昱華中醫診所</title>
 </head>
 <body>
+  <header>
     <h1>線上掛號</h1>
-    <p>請選擇門診時間並填寫基本資料完成掛號。</p>
+    <nav>
+      <a href="index.html">首頁</a> |
+      <a href="register.html">線上掛號</a> |
+      <a href="progress.html">看診進度</a> |
+      <a href="video.html">醫師影音</a> |
+      <a href="articles.html">專欄文章</a>
+    </nav>
+  </header>
+  <main>
+    <h2>請選擇掛號時間與醫師</h2>
+    <form>
+      <label>姓名：<input type="text" /></label><br />
+      <label>電話：<input type="tel" /></label><br />
+      <label>日期：<input type="date" /></label><br />
+      <label>科別：
+        <select>
+          <option>內科</option>
+          <option>婦科</option>
+          <option>針灸科</option>
+        </select>
+      </label><br />
+      <button type="submit">提交掛號</button>
+    </form>
+  </main>
+  <footer>
+    <p>© 2025 YuWua TCM Clinic</p>
+  </footer>
 </body>
 </html>
