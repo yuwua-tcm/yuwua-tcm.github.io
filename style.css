@@ -1,34 +1,95 @@
-
-body {
-    font-family: "Noto Serif TC", serif;
-    background-color: #fdfcf8;
-    color: #2f3e2e;
-    margin: 0;
-    padding: 0;
-}
-header {
-    background: linear-gradient(to right, #c5b358, #7a8e6b);
-    padding: 1em;
-    text-align: center;
-}
-.logo {
-    max-width: 100px;
-}
-nav a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: bold;
-}
-main {
-    padding: 2em;
-}
-footer {
-    background: #7a8e6b;
-    color: #fff;
-    text-align: center;
-    padding: 1em;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>昱華中醫診所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Noto Serif TC', serif;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(to bottom right, #b5c399, #8b9775);
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #5c7351;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 2.2rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #6e8962;
+      padding: 10px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+    nav a:hover {
+      background: #556b49;
+    }
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #5c7351;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav a {
+        margin: 8px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>昱華中醫診所</h1>
+    <p>YuWua TCM Clinic</p>
+  </header>
+  <nav>
+    <a href="index.html">首頁</a>
+    <a href="register.html">線上掛號</a>
+    <a href="progress.html">看診進度</a>
+    <a href="video.html">醫師影音</a>
+    <a href="articles.html">專欄文章</a>
+  </nav>
+  <div class="container">
+    <h2>歡迎來到昱華中醫診所</h2>
+    <p>我們提供專業的中醫診療服務，透過影片與文章分享健康觀念。</p>
+  </div>
+  <footer>
+    <p>© 2025 YuWua TCM Clinic. All rights reserved.</p>
+  </footer>
+</body>
+</html>
