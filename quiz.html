@@ -1,0 +1,38 @@
+<!-- 5. quiz.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>體質測驗 | 昱華中醫診所</title>
+<link rel="stylesheet" href="style.css">
+<script>
+function showResult() {
+const yang = document.getElementById('yang').checked;
+const yin = document.getElementById('yin').checked;
+const qi = document.getElementById('qi').checked;
+
+
+let result = '您的體質為：';
+if (yang) result += '陽虛體質\n';
+if (yin) result += '陰虛體質\n';
+if (qi) result += '氣虛體質\n';
+
+
+alert(result);
+}
+</script>
+</head>
+<body>
+<header>
+<h1>體質簡易測驗</h1>
+</header>
+<main class="content">
+<form onsubmit="event.preventDefault(); showResult();">
+<p><label><input type="checkbox" id="yang"> 怕冷、手腳冰冷</label></p>
+<p><label><input type="checkbox" id="yin"> 口乾、睡不好、煩熱</label></p>
+<p><label><input type="checkbox" id="qi"> 容易疲勞、說話氣虛</label></p>
+<button type="submit">查看結果</button>
+</form>
+</main>
+</body>
+</html>
