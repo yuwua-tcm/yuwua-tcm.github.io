@@ -1,137 +1,52 @@
-/* 全站通用 */
+
 body {
-  font-family: "Noto Serif TC", serif;
-  background-color: #fdfcf9;
-  color: #333;
+  font-family: "Noto Sans TC", sans-serif;
   margin: 0;
   padding: 0;
-  line-height: 1.8;
+  background-color: #fefdf9;
+  color: #2d2d2d;
 }
 
 header {
-  background-color: #4b6043; /* 橄欖綠 */
-  color: #fff;
-  padding: 1.2rem 1.5rem;
+  background-color: #526d4e;
+  color: white;
+  padding: 20px;
   text-align: center;
-  border-bottom: 5px solid #c4a169; /* 溫潤金底線 */
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  letter-spacing: 2px;
 }
 
 nav ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: 10px 0;
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-nav li {
-  margin: 0 12px;
+nav ul li {
+  margin: 0 10px;
 }
 
-nav a {
-  text-decoration: none;
-  color: #f8f8e7;
-  font-weight: bold;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: background-color 0.3s;
-}
-
-nav a:hover {
-  background-color: #c4a169; /* hover 金色 */
+nav ul li a {
   color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
 }
 
 main {
-  padding: 2rem 1.5rem;
+  padding: 40px;
   max-width: 960px;
   margin: auto;
 }
 
-h2 {
-  color: #4b6043;
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  border-left: 5px solid #c4a169;
-  padding-left: 12px;
-}
-
-form {
-  background-color: #fff;
-  padding: 1.5rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-form input, form select, form textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 6px;
-  border-radius: 5px;
-  border: 1px solid #bbb;
-  box-sizing: border-box;
-  font-size: 1rem;
-}
-
-form button {
-  margin-top: 1rem;
-  background-color: #4b6043;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #c4a169;
-  color: #fff;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-table th, table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-}
-
-table th {
-  background-color: #eee;
-  color: #4b6043;
-}
-
-article {
-  background-color: #fefefe;
-  border: 1px solid #e0dacc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-left: 6px solid #c4a169;
-  border-radius: 4px;
-}
-
-article h3 {
-  margin-top: 0;
-  color: #4b6043;
-}
-
 footer {
+  background-color: #e8e8e8;
+  color: #666;
   text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
-  color: #999;
-  background-color: #f6f6f6;
-  margin-top: 3rem;
+  padding: 20px;
+  font-size: 14px;
 }
