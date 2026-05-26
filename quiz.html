@@ -3,30 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>體質檢測 | 育華中醫診所</title>
+  <title>掛號前體質與症狀預填表 | 育華中醫診所</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <header class="site-header"><a href="index.html" class="clinic-name">育華中醫診所</a><nav><ul class="nav-list"><li><a href="index.html">首頁</a></li><li><a href="register.html">線上掛號</a></li><li><a href="queue.html">看診進度</a></li><li><a href="videos.html">醫師影音</a></li><li><a href="articles.html">專欄文章</a></li><li><a href="doctors.html">醫師介紹</a></li><li><a href="schedule.html">門診時間</a></li><li><a href="faq.html">常見問題</a></li><li><a href="transport.html">交通資訊</a></li><li><a href="announcements.html">公告消息</a></li><li><a href="process.html">診療流程</a></li><li><a href="certificates.html">醫師證照</a></li><li><a class="active" href="quiz.html">體質檢測</a></li></ul></nav></header>
+  <header class="site-header">
+    <a href="index.html" class="clinic-name">育華中醫診所</a>
+    <nav aria-label="主選單">
+      <ul class="nav-list">
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="register.html">線上掛號</a></li>
+        <li><a href="queue.html">看診進度</a></li>
+        <li><a href="videos.html">醫師影音</a></li>
+        <li><a href="articles.html">專欄文章</a></li>
+        <li><a href="doctors.html">醫師介紹</a></li>
+        <li><a href="schedule.html">門診時間</a></li>
+        <li><a href="faq.html">常見問題</a></li>
+        <li><a href="transport.html">交通資訊</a></li>
+        <li><a href="announcements.html">公告消息</a></li>
+        <li><a href="process.html">診療流程</a></li>
+        <li><a href="certificates.html">醫師證照</a></li>
+        <li><a class="active" href="quiz.html">掛號前預填</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <main class="page-shell">
-    <h1 class="page-title">體質檢測</h1>
-    <section class="card">
-      <h2>檢測模板</h2>
-      <p>此頁先建立可替換模板。正式題目、分數與結果建議可於下一階段串接 Firestore 或本地 JSON。</p>
-      <form>
-        <div class="form-row"><label>最近是否容易疲倦？</label><select><option>偶爾</option><option>經常</option><option>很少</option></select></div>
-        <div class="form-row"><label>睡眠品質如何？</label><select><option>普通</option><option>不佳</option><option>良好</option></select></div>
-        <button type="button" onclick="alert('這是模板結果，正式邏輯日後替換。')">查看範例結果</button>
-      </form>
-    </section>
-    <section style="margin-top:20px;">
-      <h2 class="page-title">體質檢測說明</h2>
-      <div id="content-message" class="notice info" hidden></div>
-      <div id="content-list-public" class="grid two" data-category="quiz"></div>
-    </section>
+    <h1 class="page-title">掛號前體質與症狀預填表</h1>
+    <p>此表是醫師問診前的資料整理工具，不會提供自動診斷。若有胸痛、呼吸困難、昏厥、單側無力或劇烈症狀，請優先就醫或撥打緊急電話。</p>
+
+    <form id="intake-form" class="grid">
+      <section class="card">
+        <h2>A. 基本資料</h2>
+        <div class="grid two">
+          <div class="form-row"><label for="intake-name">姓名</label><input id="intake-name" name="name" required></div>
+          <div class="form-row"><label for="intake-phone">電話</label><input id="intake-phone" name="phone" type="tel" required></div>
+          <div class="form-row"><label for="intake-age">年齡</label><input id="intake-age" name="age" type="number" min="0" max="120"></div>
+          <div class="form-row"><label for="intake-gender">性別</label><select id="intake-gender" name="gender"><option value="">請選擇</option><option>女</option><option>男</option><option>其他/不方便填寫</option></select></div>
+          <div class="form-row"><label for="intake-registered">是否已掛號</label><select id="intake-registered" name="registered"><option>已掛號</option><option>尚未掛號</option></select></div>
+          <div class="form-row"><label for="intake-main-concern">今日主要想看什麼問題</label><input id="intake-main-concern" name="mainConcern" required></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>B. 主訴分類</h2>
+        <div class="checkbox-grid">
+          <label><input type="checkbox" name="complaints" value="睡眠"> 睡眠</label>
+          <label><input type="checkbox" name="complaints" value="疲勞"> 疲勞</label>
+          <label><input type="checkbox" name="complaints" value="腸胃"> 腸胃</label>
+          <label><input type="checkbox" name="complaints" value="鼻過敏/呼吸"> 鼻過敏/呼吸</label>
+          <label><input type="checkbox" name="complaints" value="皮膚"> 皮膚</label>
+          <label><input type="checkbox" name="complaints" value="疼痛"> 疼痛</label>
+          <label><input type="checkbox" name="complaints" value="情緒壓力"> 情緒壓力</label>
+          <label><input type="checkbox" name="complaints" value="月經/婦科"> 月經/婦科</label>
+          <label><input type="checkbox" name="complaints" value="泌尿"> 泌尿</label>
+          <label><input type="checkbox" name="complaints" value="減重/代謝"> 減重/代謝</label>
+          <label><input type="checkbox" name="complaints" value="其他"> 其他</label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>C. 紅旗警訊</h2>
+        <p>以下項目若正在發生或近期明顯出現，請主動告知醫師；急性嚴重症狀請優先急診。</p>
+        <div class="checkbox-grid">
+          <label><input type="checkbox" name="redFlags" value="胸痛"> 胸痛</label>
+          <label><input type="checkbox" name="redFlags" value="呼吸困難"> 呼吸困難</label>
+          <label><input type="checkbox" name="redFlags" value="昏厥"> 昏厥</label>
+          <label><input type="checkbox" name="redFlags" value="黑便/血便"> 黑便/血便</label>
+          <label><input type="checkbox" name="redFlags" value="血尿"> 血尿</label>
+          <label><input type="checkbox" name="redFlags" value="不明體重減輕"> 不明體重減輕</label>
+          <label><input type="checkbox" name="redFlags" value="持續發燒"> 持續發燒</label>
+          <label><input type="checkbox" name="redFlags" value="劇烈頭痛"> 劇烈頭痛</label>
+          <label><input type="checkbox" name="redFlags" value="單側無力或口齒不清"> 單側無力或口齒不清</label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>D. 中醫八綱收斂</h2>
+        <div class="grid two">
+          <div class="form-row"><label>怕冷或怕熱</label><select name="coldHeat"><option>無特別</option><option>怕冷</option><option>怕熱</option><option>冷熱交替</option></select></div>
+          <div class="form-row"><label>口乾口苦</label><select name="dryBitter"><option>無特別</option><option>口乾</option><option>口苦</option><option>口乾且口苦</option></select></div>
+          <div class="form-row"><label>汗多或盜汗</label><select name="sweat"><option>無特別</option><option>容易汗多</option><option>夜間盜汗</option><option>少汗</option></select></div>
+          <div class="form-row"><label>食慾</label><select name="appetite"><option>正常</option><option>食慾差</option><option>容易餓</option><option>食後脹</option></select></div>
+          <div class="form-row"><label>大便型態</label><select name="stool"><option>正常</option><option>偏稀</option><option>偏硬</option><option>便秘</option><option>腹瀉便秘交替</option></select></div>
+          <div class="form-row"><label>小便狀況</label><select name="urine"><option>正常</option><option>頻尿</option><option>夜尿</option><option>尿少</option><option>尿色深</option></select></div>
+          <div class="form-row"><label>睡眠型態</label><select name="sleepPattern"><option>正常</option><option>難入睡</option><option>易醒</option><option>多夢</option><option>早醒</option></select></div>
+          <div class="form-row"><label>情緒狀態</label><select name="mood"><option>平穩</option><option>焦慮</option><option>煩躁</option><option>低落</option><option>壓力大</option></select></div>
+          <div class="form-row"><label>疼痛性質</label><select name="painQuality"><option>無明顯疼痛</option><option>痠</option><option>刺痛</option><option>脹痛</option><option>固定痛</option><option>游走痛</option></select></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>E. 生活型態</h2>
+        <div class="grid two">
+          <div class="form-row"><label for="bedtime">幾點睡</label><input id="bedtime" name="bedtime" placeholder="例如：晚上 12 點"></div>
+          <div class="form-row"><label for="caffeine">咖啡/茶</label><input id="caffeine" name="caffeine" placeholder="例如：每天一杯咖啡"></div>
+          <div class="form-row"><label>壓力程度</label><select name="stress"><option>低</option><option>中</option><option>高</option></select></div>
+          <div class="form-row"><label>運動頻率</label><select name="exercise"><option>少於每週 1 次</option><option>每週 1-2 次</option><option>每週 3 次以上</option></select></div>
+          <div class="form-row"><label>工作久坐</label><select name="sedentary"><option>否</option><option>偶爾</option><option>經常</option></select></div>
+          <div class="form-row"><label for="diet">飲食偏好</label><input id="diet" name="diet" placeholder="例如：冰飲、甜食、油炸、辛辣"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>F. 自由描述</h2>
+        <div class="form-row"><label for="free-description">患者可自行補充病情</label><textarea id="free-description" name="freeDescription" rows="6"></textarea></div>
+        <button type="submit">送出預填表</button>
+        <div id="intake-message" class="notice info" hidden></div>
+      </section>
+    </form>
   </main>
-  <footer class="site-footer"><p>體質檢測資料模板已建立。</p></footer>
+
+  <footer class="site-footer"><p>此表僅供醫師問診前參考，不提供自動診斷。</p></footer>
+
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
