@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   const $ = (selector) => document.querySelector(selector);
   const nowIso = () => new Date().toISOString();
 
@@ -423,7 +423,7 @@
       transport: "交通資訊",
       process: "診療流程",
       certificates: "醫師證照",
-      quiz: "體質檢測"
+      quiz: "掛號前預填"
     };
     return map[value] || value || "";
   }
@@ -483,3 +483,4 @@
     });
   });
 })();
+
