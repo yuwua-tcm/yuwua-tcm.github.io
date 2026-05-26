@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>後台管理 | 育華中醫診所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body id="admin-page">
+  <header class="site-header">
+    <a href="index.html" class="clinic-name">育華中醫診所</a>
+    <nav aria-label="主選單">
+      <ul class="nav-list">
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="register.html">線上掛號</a></li>
+        <li><a href="queue.html">看診進度</a></li>
+        <li><a class="active" href="admin.html">後台管理</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <h1 class="page-title">後台管理</h1>
+    <div id="admin-message" class="notice info" hidden></div>
+
+    <section id="login-panel" class="card">
+      <h2>管理者登入</h2>
+      <p>請使用 Firebase Authentication 建立的 Email/Password 帳號登入。登入後才能更新看診進度與查看掛號資料。</p>
+      <form id="admin-login-form">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="form-row">
+          <label for="password">密碼</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">登入後台</button>
+      </form>
+    </section>
+
+    <section id="admin-dashboard" hidden>
+      <div class="grid two">
+        <form id="queue-form" class="card">
+          <h2>更新看診進度</h2>
+          <div class="form-row">
+            <label for="admin-general">一般門診目前號碼</label>
+            <input id="admin-general" type="number" min="0" step="1" value="0">
+          </div>
+          <div class="form-row">
+            <label for="admin-acupuncture">針傷科目前號碼</label>
+            <input id="admin-acupuncture" type="number" min="0" step="1" value="0">
+          </div>
+          <div class="form-row">
+            <label for="admin-note">現場提醒</label>
+            <textarea id="admin-note" rows="3" placeholder="例如：請提前 3 號到診所候診。"></textarea>
+          </div>
+          <button type="submit">儲存看診進度</button>
+          <button type="button" class="secondary" data-logout>登出</button>
+        </form>
+
+        <section class="card">
+          <h2>Firestore 資料位置</h2>
+          <p>看診進度：<code>clinicStatus/today</code></p>
+          <p>掛號資料：<code>registrations</code></p>
+          <p>號碼計數：<code>counters/general</code>、<code>counters/acupuncture</code></p>
+        </section>
+      </div>
+
+      <section class="card" style="margin-top:20px;">
+        <h2>最新掛號資料</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>號碼</th>
+                <th>姓名 / 電話</th>
+                <th>科別</th>
+                <th>日期</th>
+                <th>狀態</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="registration-list">
+              <tr><td colspan="6">讀取中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:20px;">
+        <h2>發布網站內容</h2>
+        <p>可新增公告、文章、影音、FAQ、醫師介紹等內容。送出後會寫入 Firestore 的 <code>contentItems</code>。</p>
+        <form id="content-form">
+          <div class="grid two">
+            <div class="form-row">
+              <label for="content-category">發布到哪個頁面</label>
+              <select id="content-category" name="category">
+                <option value="announcements">公告消息</option>
+                <option value="articles">專欄文章</option>
+                <option value="videos">醫師影音</option>
+                <option value="faq">常見問題</option>
+                <option value="doctors">醫師介紹</option>
+                <option value="schedule">門診時間</option>
+                <option value="transport">交通資訊</option>
+                <option value="process">診療流程</option>
+                <option value="certificates">醫師證照</option>
+                <option value="quiz">體質檢測</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="content-url">連結或影片網址</label>
+              <input id="content-url" name="url" type="url" placeholder="YouTube、Google Map、文章連結，可空白">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="content-title">標題</label>
+            <input id="content-title" name="title" required>
+          </div>
+          <div class="form-row">
+            <label for="content-body">內容</label>
+            <textarea id="content-body" name="body" rows="5" required></textarea>
+          </div>
+          <div class="grid two">
+            <div class="form-row">
+              <label for="content-order">排序</label>
+              <input id="content-order" name="order" type="number" value="100">
+            </div>
+            <div class="form-row">
+              <label for="content-published">狀態</label>
+              <select id="content-published" name="published">
+                <option value="true">立即發布</option>
+                <option value="false">先存草稿</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">儲存內容</button>
+        </form>
+      </section>
+
+      <section class="card" style="margin-top:20px;">
+        <h2>已建立內容</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>頁面</th>
+                <th>標題</th>
+                <th>狀態</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="content-list">
+              <tr><td colspan="4">讀取中...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>後台網址請只提供給診所人員，實際權限以 Firebase Auth 與 Firestore Rules 控制。</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/clinic-firebase.js"></script>
+  <script src="js/clinic-app.js"></script>
+</body>
+</html>

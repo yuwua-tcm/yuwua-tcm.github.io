@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>看診進度 | 育華中醫診所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body id="queue-page">
+  <header class="site-header">
+    <a href="index.html" class="clinic-name">育華中醫診所</a>
+    <nav aria-label="主選單">
+      <ul class="nav-list">
+        <li><a href="index.html">首頁</a></li>
+        <li><a href="register.html">線上掛號</a></li>
+        <li><a class="active" href="queue.html">看診進度</a></li>
+        <li><a href="videos.html">醫師影音</a></li>
+        <li><a href="articles.html">專欄文章</a></li>
+        <li><a href="doctors.html">醫師介紹</a></li>
+        <li><a href="schedule.html">門診時間</a></li>
+        <li><a href="faq.html">常見問題</a></li>
+        <li><a href="transport.html">交通資訊</a></li>
+        <li><a href="announcements.html">公告消息</a></li>
+        <li><a href="process.html">診療流程</a></li>
+        <li><a href="certificates.html">醫師證照</a></li>
+        <li><a href="quiz.html">體質檢測</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <h1 class="page-title">看診進度</h1>
+    <p>此頁即時讀取 Firestore 的 <code>clinicStatus/today</code>。若診所後台更新號碼，病人頁面會同步刷新。</p>
+    <div id="queue-message" class="notice info" hidden></div>
+
+    <section class="grid two">
+      <article class="card">
+        <h2>一般門診</h2>
+        <div id="queue-general" class="queue-number">--</div>
+        <p>目前看診號碼</p>
+      </article>
+      <article class="card">
+        <h2>針傷科</h2>
+        <div id="queue-acupuncture" class="queue-number">--</div>
+        <p>目前看診號碼</p>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h2>現場提醒</h2>
+      <p id="queue-note">讀取中...</p>
+      <p>最後更新：<span id="queue-updated">讀取中...</span></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>實際看診順序仍以現場叫號與櫃台安排為準。</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/clinic-firebase.js"></script>
+  <script src="js/clinic-app.js"></script>
+</body>
+</html>

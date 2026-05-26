@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>昱華中醫診所 YuHua TCM Clinic</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>育華中醫診所</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <header>
-    <h1>昱華中醫診所</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">首頁</a></li>
+  <header class="site-header">
+    <a href="index.html" class="clinic-name">育華中醫診所</a>
+    <nav aria-label="主選單">
+      <ul class="nav-list">
+        <li><a class="active" href="index.html">首頁</a></li>
         <li><a href="register.html">線上掛號</a></li>
-        <li><a href="progress.html">看診進度</a></li>
-        <li><a href="video.html">醫師影音</a></li>
+        <li><a href="queue.html">看診進度</a></li>
+        <li><a href="videos.html">醫師影音</a></li>
         <li><a href="articles.html">專欄文章</a></li>
         <li><a href="doctors.html">醫師介紹</a></li>
         <li><a href="schedule.html">門診時間</a></li>
@@ -23,19 +26,44 @@
         <li><a href="announcements.html">公告消息</a></li>
         <li><a href="process.html">診療流程</a></li>
         <li><a href="certificates.html">醫師證照</a></li>
+        <li><a href="quiz.html">體質檢測</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
-      <h2>歡迎來到昱華中醫診所</h2>
-      <p>我們提供專業的中醫診療與個人化養生建議。</p>
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>溫和調理，安心看診</h1>
+        <p>這是 GitHub Pages 上線部署版。病人可以掃 QR Code 進入網站、線上掛號，診所可透過 Firebase 後台更新看診進度。</p>
+        <div class="button-row">
+          <a class="button secondary" href="register.html">立即線上掛號</a>
+          <a class="button" href="queue.html">查看看診進度</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-shell grid three">
+      <article class="card">
+        <h2>線上掛號</h2>
+        <p>填寫姓名、電話、科別與預約日期後，資料會寫入 Firebase Firestore。</p>
+        <a class="button" href="register.html">前往掛號</a>
+      </article>
+      <article class="card">
+        <h2>看診進度</h2>
+        <p>看診號碼由後台更新，病人手機、iPad、電腦都能即時查看。</p>
+        <a class="button" href="queue.html">查看進度</a>
+      </article>
+      <article class="card">
+        <h2>門診資訊</h2>
+        <p>醫師介紹、門診時間、交通方式與常見問題已建立正式頁面，可日後替換內容。</p>
+        <a class="button" href="schedule.html">門診時間</a>
+      </article>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 昱華中醫診所 | YuHua TCM Clinic</p>
+  <footer class="site-footer">
+    <p>育華中醫診所 | GitHub Pages + Firebase 部署版</p>
   </footer>
 </body>
 </html>

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register | 昱華中醫診所</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>線上掛號 | 育華中醫診所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <header>
-    <h1>昱華中醫診所</h1>
-    <nav>
-      <ul>
+  <header class="site-header">
+    <a href="index.html" class="clinic-name">育華中醫診所</a>
+    <nav aria-label="主選單">
+      <ul class="nav-list">
         <li><a href="index.html">首頁</a></li>
-        <li><a href="register.html">線上掛號</a></li>
-        <li><a href="progress.html">看診進度</a></li>
-        <li><a href="video.html">醫師影音</a></li>
+        <li><a class="active" href="register.html">線上掛號</a></li>
+        <li><a href="queue.html">看診進度</a></li>
+        <li><a href="videos.html">醫師影音</a></li>
         <li><a href="articles.html">專欄文章</a></li>
         <li><a href="doctors.html">醫師介紹</a></li>
         <li><a href="schedule.html">門診時間</a></li>
@@ -23,17 +24,61 @@
         <li><a href="announcements.html">公告消息</a></li>
         <li><a href="process.html">診療流程</a></li>
         <li><a href="certificates.html">醫師證照</a></li>
+        <li><a href="quiz.html">體質檢測</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <h2>Register</h2>
-    <p>此頁面內容尚在建置中，敬請期待。</p>
+  <main class="page-shell grid two">
+    <section class="card">
+      <h1 class="page-title">線上掛號</h1>
+      <p>請填寫基本資料。送出後會建立 Firestore 掛號紀錄，後台可即時查看。</p>
+      <form id="registration-form">
+        <div class="form-row">
+          <label for="name">姓名</label>
+          <input id="name" name="name" autocomplete="name" required>
+        </div>
+        <div class="form-row">
+          <label for="phone">聯絡電話</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+        </div>
+        <div class="form-row">
+          <label for="department">科別</label>
+          <select id="department" name="department">
+            <option value="general">一般門診</option>
+            <option value="acupuncture">針傷科</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="preferredDate">預約日期</label>
+          <input id="preferredDate" name="preferredDate" type="date" required>
+        </div>
+        <div class="form-row">
+          <label for="note">症狀備註</label>
+          <textarea id="note" name="note" rows="4" placeholder="可簡述主要不適，正式看診仍以醫師評估為準。"></textarea>
+        </div>
+        <button type="submit">送出掛號</button>
+        <div id="form-message" class="notice info" hidden></div>
+      </form>
+    </section>
+
+    <aside class="card">
+      <h2>掛號說明</h2>
+      <p>此頁會寫入 Firestore 的 <code>registrations</code> 集合，不是只有畫面效果。</p>
+      <p>若送出失敗，通常是 Firebase 設定或 Firestore Rules 尚未完成。</p>
+      <a class="button secondary" href="queue.html">送出後查看看診進度</a>
+    </aside>
   </main>
 
-  <footer>
-    <p>&copy; 2025 昱華中醫診所 | YuHua TCM Clinic</p>
+  <footer class="site-footer">
+    <p>請勿在表單中填寫完整身分證字號或敏感病歷。</p>
   </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/clinic-firebase.js"></script>
+  <script src="js/clinic-app.js"></script>
 </body>
 </html>

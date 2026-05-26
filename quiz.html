@@ -1,38 +1,37 @@
-<!-- 5. quiz.html -->
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<title>體質測驗 | 昱華中醫診所</title>
-<link rel="stylesheet" href="style.css">
-<script>
-function showResult() {
-const yang = document.getElementById('yang').checked;
-const yin = document.getElementById('yin').checked;
-const qi = document.getElementById('qi').checked;
-
-
-let result = '您的體質為：';
-if (yang) result += '陽虛體質\n';
-if (yin) result += '陰虛體質\n';
-if (qi) result += '氣虛體質\n';
-
-
-alert(result);
-}
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>體質檢測 | 育華中醫診所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-<header>
-<h1>體質簡易測驗</h1>
-</header>
-<main class="content">
-<form onsubmit="event.preventDefault(); showResult();">
-<p><label><input type="checkbox" id="yang"> 怕冷、手腳冰冷</label></p>
-<p><label><input type="checkbox" id="yin"> 口乾、睡不好、煩熱</label></p>
-<p><label><input type="checkbox" id="qi"> 容易疲勞、說話氣虛</label></p>
-<button type="submit">查看結果</button>
-</form>
-</main>
+  <header class="site-header"><a href="index.html" class="clinic-name">育華中醫診所</a><nav><ul class="nav-list"><li><a href="index.html">首頁</a></li><li><a href="register.html">線上掛號</a></li><li><a href="queue.html">看診進度</a></li><li><a href="videos.html">醫師影音</a></li><li><a href="articles.html">專欄文章</a></li><li><a href="doctors.html">醫師介紹</a></li><li><a href="schedule.html">門診時間</a></li><li><a href="faq.html">常見問題</a></li><li><a href="transport.html">交通資訊</a></li><li><a href="announcements.html">公告消息</a></li><li><a href="process.html">診療流程</a></li><li><a href="certificates.html">醫師證照</a></li><li><a class="active" href="quiz.html">體質檢測</a></li></ul></nav></header>
+  <main class="page-shell">
+    <h1 class="page-title">體質檢測</h1>
+    <section class="card">
+      <h2>檢測模板</h2>
+      <p>此頁先建立可替換模板。正式題目、分數與結果建議可於下一階段串接 Firestore 或本地 JSON。</p>
+      <form>
+        <div class="form-row"><label>最近是否容易疲倦？</label><select><option>偶爾</option><option>經常</option><option>很少</option></select></div>
+        <div class="form-row"><label>睡眠品質如何？</label><select><option>普通</option><option>不佳</option><option>良好</option></select></div>
+        <button type="button" onclick="alert('這是模板結果，正式邏輯日後替換。')">查看範例結果</button>
+      </form>
+    </section>
+    <section style="margin-top:20px;">
+      <h2 class="page-title">體質檢測說明</h2>
+      <div id="content-message" class="notice info" hidden></div>
+      <div id="content-list-public" class="grid two" data-category="quiz"></div>
+    </section>
+  </main>
+  <footer class="site-footer"><p>體質檢測資料模板已建立。</p></footer>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/clinic-firebase.js"></script>
+  <script src="js/clinic-app.js"></script>
 </body>
 </html>
