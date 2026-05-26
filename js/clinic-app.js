@@ -66,7 +66,9 @@
     });
 
     form.reset();
-    showMessage("#form-message", `掛號成功。您的號碼是 ${number} 號，請留意看診進度。`, "success");
+    showMessage("#form-message", `掛號成功。您的號碼是 ${number} 號。建議接著填寫掛號前體質與症狀預填表，協助醫師快速掌握重點。`, "success");
+    const next = $("#after-register-action");
+    if (next) next.hidden = false;
   }
 
   function listenQueue() {
@@ -116,6 +118,7 @@
       if (user) {
         listenAdminStatus();
         listenRegistrations();
+        listenIntakeForms();
         listenAdminContent();
       }
     });
@@ -159,6 +162,121 @@
         tbody.appendChild(tr);
       });
     });
+  }
+
+  function listenIntakeForms() {
+    const container = $("#intake-list");
+    if (!container) return;
+    clinicDb.collection("intakeForms").orderBy("createdAt", "desc").limit(30).onSnapshot((snap) => {
+      container.innerHTML = "";
+      if (snap.empty) {
+        container.innerHTML = '<article class="card"><p>目前尚無預填表資料。</p></article>';
+        return;
+      }
+      snap.forEach((doc) => {
+        const item = doc.data();
+        const summary = item.doctorSummary || {};
+        const article = document.createElement("article");
+        article.className = "card";
+        article.innerHTML = `
+          <h3>${escapeHtml(item.name || "未填姓名")} <small>${escapeHtml(item.phone || "")}</small></h3>
+          <p><strong>今日主訴：</strong>${escapeHtml(summary.mainConcern || item.mainConcern || "")}</p>
+          <p><strong>主要線頭：</strong>${escapeHtml((summary.mainThreads || []).join("、") || "未勾選")}</p>
+          <p><strong>需要優先追問：</strong>${escapeHtml((summary.followUpQuestions || []).join("、") || "無明顯項目")}</p>
+          <p><strong>紅旗提醒：</strong>${escapeHtml((summary.redFlagAlerts || []).join("、") || "未勾選")}</p>
+          <p><strong>中醫可能收斂方向：</strong>${escapeHtml((summary.tcmDirections || []).join("、") || "待醫師問診判斷")}</p>
+          <p><strong>自由描述：</strong>${escapeHtml(summary.freeDescription || "未填寫")}</p>
+          <p><small>送出時間：${formatTimestamp(item.createdAt)}</small></p>
+        `;
+        container.appendChild(article);
+      });
+    });
+  }
+
+  async function submitIntakeForm(event) {
+    event.preventDefault();
+    if (!assertFirebase("#intake-message")) return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const values = Object.fromEntries(formData.entries());
+    const complaints = formData.getAll("complaints");
+    const redFlags = formData.getAll("redFlags");
+
+    if (!values.name || !values.phone || !values.mainConcern) {
+      showMessage("#intake-message", "請填寫姓名、電話與今日主要問題。", "error");
+      return;
+    }
+
+    const data = {
+      name: String(values.name || "").trim(),
+      phone: String(values.phone || "").trim(),
+      age: values.age ? Number(values.age) : null,
+      gender: values.gender || "",
+      registered: values.registered || "",
+      mainConcern: String(values.mainConcern || "").trim(),
+      complaints,
+      redFlags,
+      tcm: {
+        coldHeat: values.coldHeat || "",
+        dryBitter: values.dryBitter || "",
+        sweat: values.sweat || "",
+        appetite: values.appetite || "",
+        stool: values.stool || "",
+        urine: values.urine || "",
+        sleepPattern: values.sleepPattern || "",
+        mood: values.mood || "",
+        painQuality: values.painQuality || ""
+      },
+      lifestyle: {
+        bedtime: values.bedtime || "",
+        caffeine: values.caffeine || "",
+        stress: values.stress || "",
+        exercise: values.exercise || "",
+        sedentary: values.sedentary || "",
+        diet: values.diet || ""
+      },
+      freeDescription: String(values.freeDescription || "").trim()
+    };
+
+    data.doctorSummary = buildDoctorSummary(data);
+    data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+    data.createdAtLocal = nowIso();
+    data.source = "github-pages";
+
+    await clinicDb.collection("intakeForms").add(data);
+    form.reset();
+    showMessage("#intake-message", "已完成預填，門診時醫師會參考。", "success");
+  }
+
+  function buildDoctorSummary(data) {
+    const followUp = [];
+    const directions = [];
+    const threads = [...data.complaints];
+
+    if (data.redFlags.length) followUp.push("紅旗警訊需優先確認");
+    if (data.complaints.includes("睡眠") || data.tcm.sleepPattern !== "正常") followUp.push("睡眠型態");
+    if (data.complaints.includes("腸胃") || data.tcm.appetite !== "正常" || data.tcm.stool !== "正常") followUp.push("腸胃與大便");
+    if (data.complaints.includes("疼痛") || data.tcm.painQuality !== "無明顯疼痛") followUp.push("疼痛部位、誘因與性質");
+    if (data.complaints.includes("情緒壓力") || data.tcm.mood !== "平穩") followUp.push("壓力與情緒");
+    if (data.complaints.includes("月經/婦科")) followUp.push("月經週期、量色與疼痛");
+
+    if (data.tcm.coldHeat && data.tcm.coldHeat !== "無特別") directions.push(data.tcm.coldHeat);
+    if (data.tcm.dryBitter && data.tcm.dryBitter !== "無特別") directions.push(data.tcm.dryBitter);
+    if (data.tcm.sweat && data.tcm.sweat !== "無特別") directions.push(data.tcm.sweat);
+    if (data.tcm.stool && data.tcm.stool !== "正常") directions.push("大便" + data.tcm.stool);
+    if (data.tcm.urine && data.tcm.urine !== "正常") directions.push(data.tcm.urine);
+    if (data.lifestyle.stress === "高") directions.push("壓力偏高");
+    if (data.lifestyle.sedentary === "經常") directions.push("久坐");
+
+    return {
+      mainConcern: data.mainConcern,
+      mainThreads: threads,
+      followUpQuestions: [...new Set(followUp)],
+      redFlagAlerts: data.redFlags,
+      tcmDirections: [...new Set(directions)],
+      freeDescription: data.freeDescription
+    };
   }
 
   async function updateQueue(event) {
@@ -314,6 +432,11 @@
     return escapeHtml(value).replace(/\n/g, "<br>");
   }
 
+  function formatTimestamp(value) {
+    if (value && value.toDate) return value.toDate().toLocaleString("zh-TW");
+    return "";
+  }
+
   function escapeAttribute(value) {
     return escapeHtml(value).replace(/`/g, "&#096;");
   }
@@ -338,11 +461,13 @@
     const adminLoginForm = $("#admin-login-form");
     const queueForm = $("#queue-form");
     const contentForm = $("#content-form");
+    const intakeForm = $("#intake-form");
 
     if (registrationForm) registrationForm.addEventListener("submit", submitRegistration);
     if (adminLoginForm) adminLoginForm.addEventListener("submit", adminLogin);
     if (queueForm) queueForm.addEventListener("submit", updateQueue);
     if (contentForm) contentForm.addEventListener("submit", publishContent);
+    if (intakeForm) intakeForm.addEventListener("submit", submitIntakeForm);
     if ($("#queue-page")) listenQueue();
     if ($("#admin-page")) setupAdmin();
     renderPublicContent();
