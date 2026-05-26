@@ -35,9 +35,9 @@ a {
 
 .clinic-name {
   display: inline-block;
-  font-family: "Noto Serif TC", serif;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 900;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
   letter-spacing: 0;
   text-decoration: none;
   margin-bottom: 22px;
