@@ -35,10 +35,10 @@ a {
 
 .clinic-name {
   display: inline-block;
-  font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 700;
-  letter-spacing: 0;
+  font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif !important;
+  font-size: clamp(2rem, 5vw, 3.2rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em;
   text-decoration: none;
   margin-bottom: 22px;
 }
